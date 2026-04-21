@@ -12,6 +12,7 @@
     "resolveJsonModule": true,
     "noEmitOnError": true,
     "noImplicitThis": true,
+    "ignoreDeprecations": "6.0",
     "outDir": "dist",
     "rootDir": "."
   },
