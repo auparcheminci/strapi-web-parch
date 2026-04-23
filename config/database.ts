@@ -1,8 +1,47 @@
+import fs from 'fs';
 import path from 'path';
 import type { Core } from '@strapi/strapi';
 
+const readCertFile = (filePath?: string) => {
+  if (!filePath) {
+    return undefined;
+  }
+
+  return fs.readFileSync(filePath, 'utf8');
+};
+
+const forceSslModeOnConnectionString = (connectionString?: string) => {
+  if (!connectionString) {
+    return undefined;
+  }
+
+  try {
+    const connectionUrl = new URL(connectionString);
+    connectionUrl.searchParams.set('sslmode', 'require');
+    return connectionUrl.toString();
+  } catch {
+    return connectionString;
+  }
+};
+
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database => {
   const client = env('DATABASE_CLIENT', 'sqlite');
+
+  const mysqlSslEnabled = env.bool('DATABASE_SSL', false);
+
+  const mysqlSsl = mysqlSslEnabled && {
+    key: readCertFile(env('DATABASE_SSL_KEY_PATH', undefined)),
+    cert: readCertFile(env('DATABASE_SSL_CERT_PATH', undefined)),
+    ca: readCertFile(env('DATABASE_SSL_CA_PATH', undefined)),
+    rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
+  };
+
+  const postgresSsl = {
+    key: readCertFile(env('DATABASE_SSL_KEY_PATH', undefined)),
+    cert: readCertFile(env('DATABASE_SSL_CERT_PATH', undefined)),
+    ca: readCertFile(env('DATABASE_SSL_CA_PATH', '/etc/ssl/certs/ca-certificates.crt')),
+    rejectUnauthorized: false,
+  };
 
   const connections = {
     mysql: {
@@ -12,33 +51,19 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
         database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
-        ssl: env.bool('DATABASE_SSL', false) && {
-          key: env('DATABASE_SSL_KEY', undefined),
-          cert: env('DATABASE_SSL_CERT', undefined),
-          ca: env('DATABASE_SSL_CA', undefined),
-          capath: env('DATABASE_SSL_CAPATH', undefined),
-          cipher: env('DATABASE_SSL_CIPHER', undefined),
-          rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
-        },
+        ssl: mysqlSsl,
       },
       pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
     },
     postgres: {
       connection: {
-        connectionString: env('DATABASE_URL'),
+        connectionString: forceSslModeOnConnectionString(env('DATABASE_URL')),
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
         database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
-        ssl: env.bool('DATABASE_SSL', false) && {
-          key: env('DATABASE_SSL_KEY', undefined),
-          cert: env('DATABASE_SSL_CERT', undefined),
-          ca: env('DATABASE_SSL_CA', undefined),
-          capath: env('DATABASE_SSL_CAPATH', undefined),
-          cipher: env('DATABASE_SSL_CIPHER', undefined),
-          rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
-        },
+        ssl: postgresSsl,
         schema: env('DATABASE_SCHEMA', 'public'),
       },
       pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
