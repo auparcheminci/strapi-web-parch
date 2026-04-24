@@ -39,7 +39,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Database 
   const postgresSsl = {
     key: readCertFile(env('DATABASE_SSL_KEY_PATH', undefined)),
     cert: readCertFile(env('DATABASE_SSL_CERT_PATH', undefined)),
-    ca: readCertFile(env('DATABASE_SSL_CA_PATH', '/etc/ssl/certs/ca-certificates.crt')),
+    ca: readCertFile(env('DATABASE_SSL_CA_PATH')),
     rejectUnauthorized: false,
   };
 
