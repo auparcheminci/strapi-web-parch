@@ -26,6 +26,22 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
       },
     },
   },
+  email: {
+    config: {
+      provider: 'amazon-ses',
+      providerOptions: {
+        region: env('AWS_SES_REGION', 'eu-west-1'),
+        credentials: {
+          accessKeyId: env('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: env('AWS_ACCESS_SECRET'),
+        },
+      },
+      settings: {
+        defaultFrom: env('AWS_SES_FROM'),
+        defaultReplyTo: env('AWS_SES_FROM'),
+      },
+    },
+  },
 });
 
 export default config;
