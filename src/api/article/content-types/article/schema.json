@@ -4,7 +4,7 @@
   "info": {
     "singularName": "article",
     "pluralName": "articles",
-    "displayName": "Article",
+    "displayName": "Produits",
     "description": "Create your blog content"
   },
   "options": {
@@ -12,28 +12,28 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "designation": {
       "type": "string"
     },
-    "description": {
-      "type": "text",
+    "reference": {
+      "type": "string",
       "maxLength": 80
     },
+    "codebarre": {
+      "type": "string"
+    },
     "slug": {
-      "type": "uid",
-      "targetField": "title"
+      "type": "uid"
     },
     "cover": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images", "files", "videos"]
-    },
-    "author": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::author.author",
-      "inversedBy": "articles"
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     },
     "category": {
       "type": "relation",
@@ -43,7 +43,9 @@
     },
     "blocks": {
       "type": "dynamiczone",
-      "components": ["shared.media", "shared.quote", "shared.rich-text", "shared.slider"]
+      "components": [
+        "shared.media"
+      ]
     }
   }
 }
