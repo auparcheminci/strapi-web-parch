@@ -513,7 +513,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiCatalogueCatalogue extends Struct.CollectionTypeSchema {
   collectionName: 'catalogues';
   info: {
-    displayName: 'Catalogue';
+    displayName: 'Catalogues';
     pluralName: 'catalogues';
     singularName: 'catalogue';
   };
@@ -543,7 +543,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
     description: 'Organize your content into categories';
-    displayName: 'Famille';
+    displayName: 'Familles';
     pluralName: 'categories';
     singularName: 'category';
   };

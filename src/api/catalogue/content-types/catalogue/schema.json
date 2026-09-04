@@ -4,7 +4,7 @@
   "info": {
     "singularName": "catalogue",
     "pluralName": "catalogues",
-    "displayName": "Catalogue"
+    "displayName": "Catalogues"
   },
   "options": {
     "draftAndPublish": true
