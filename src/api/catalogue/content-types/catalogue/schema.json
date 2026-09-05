@@ -14,14 +14,14 @@
     "Fournisseur": {
       "type": "string"
     },
-    "catalogue": {
+    "Nom du catalogue": {
+      "type": "string"
+    },
+    "Document": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "files"
       ]
     }
   }
