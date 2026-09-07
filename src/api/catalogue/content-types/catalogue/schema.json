@@ -30,6 +30,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "Gammes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gamme.gamme",
+      "inversedBy": "catalogues"
     }
   }
 }

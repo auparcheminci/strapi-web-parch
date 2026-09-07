@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gammes",
+  "info": {
+    "singularName": "gamme",
+    "pluralName": "gammes",
+    "displayName": "Gammes"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "catalogues": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::catalogue.catalogue",
+      "mappedBy": "Gammes"
+    }
+  }
+}
