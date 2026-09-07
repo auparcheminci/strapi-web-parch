@@ -23,6 +23,13 @@
       "allowedTypes": [
         "files"
       ]
+    },
+    "Couverture": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
