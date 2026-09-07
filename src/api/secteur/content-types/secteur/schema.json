@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "secteurs",
+  "info": {
+    "singularName": "secteur",
+    "pluralName": "secteurs",
+    "displayName": "Secteurs"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "realisations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::realisation.realisation",
+      "mappedBy": "Secteur"
+    }
+  }
+}

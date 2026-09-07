@@ -20,6 +20,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "Secteur": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::secteur.secteur",
+      "inversedBy": "realisations"
     }
   }
 }

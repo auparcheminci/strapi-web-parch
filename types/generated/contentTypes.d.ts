@@ -655,8 +655,41 @@ export interface ApiRealisationRealisation extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     Nom: Schema.Attribute.String;
-    Photos: Schema.Attribute.Media<'images', true>;
+    Photo: Schema.Attribute.Media<'images'>;
     publishedAt: Schema.Attribute.DateTime;
+    Secteur: Schema.Attribute.Relation<'manyToMany', 'api::secteur.secteur'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSecteurSecteur extends Struct.CollectionTypeSchema {
+  collectionName: 'secteurs';
+  info: {
+    displayName: 'Secteurs';
+    pluralName: 'secteurs';
+    singularName: 'secteur';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::secteur.secteur'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    realisations: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::realisation.realisation'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1181,6 +1214,7 @@ declare module '@strapi/strapi' {
       'api::gamme.gamme': ApiGammeGamme;
       'api::global.global': ApiGlobalGlobal;
       'api::realisation.realisation': ApiRealisationRealisation;
+      'api::secteur.secteur': ApiSecteurSecteur;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
