@@ -22,6 +22,9 @@
     "codebarre": {
       "type": "string"
     },
+    "description": {
+      "type": "text"
+    },
     "slug": {
       "type": "uid"
     },
@@ -30,10 +33,25 @@
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ]
+    },
+    "technical-file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
+      ]
+    },
+    "niveau-stock": {
+      "type": "json"
+    },
+    "ranges": {
+      "type": "json"
+    },
+    "packaging": {
+      "type": "json"
     },
     "category": {
       "type": "relation",
