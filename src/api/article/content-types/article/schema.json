@@ -13,14 +13,17 @@
   "pluginOptions": {},
   "attributes": {
     "designation": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "reference-parch": {
       "type": "string",
+      "required": true,
       "maxLength": 80
     },
     "reference-fournisseur": {
       "type": "string",
+      "required": true,
       "maxLength": 80
     },
     "codebarre": {
@@ -74,6 +77,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
+      "required": true,
       "inversedBy": "articles"
     },
     "blocks": {
