@@ -34,6 +34,7 @@ export default {
       ranges: 'Déclinaison',
       packaging: 'Collisage',
     };
+    const referenceParchDescription = 'Ecrit ici la référence sur Sage';
 
     const primaryFields = new Set([
       'designation',
@@ -69,6 +70,8 @@ export default {
 
     const needsUpdate =
       JSON.stringify(editLayout) !== JSON.stringify(updatedEditLayout) ||
+      configuration.metadatas['reference-parch'].edit.description !==
+        referenceParchDescription ||
       Object.entries(fieldLabels).some(
         ([field, label]) =>
           configuration.metadatas[field].edit.label !== label ||
@@ -77,6 +80,13 @@ export default {
 
     if (needsUpdate) {
       const updatedMetadatas = { ...configuration.metadatas };
+      updatedMetadatas['reference-parch'] = {
+        ...updatedMetadatas['reference-parch'],
+        edit: {
+          ...updatedMetadatas['reference-parch'].edit,
+          description: referenceParchDescription,
+        },
+      };
       for (const [field, label] of Object.entries(fieldLabels)) {
         updatedMetadatas[field] = {
           ...updatedMetadatas[field],
