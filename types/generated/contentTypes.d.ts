@@ -511,6 +511,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         maxLength: 80;
       }>;
     slug: Schema.Attribute.UID;
+    'support-de-communication': Schema.Attribute.Media<
+      'images' | 'files' | 'videos'
+    >;
     'technical-file': Schema.Attribute.Media<'files'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

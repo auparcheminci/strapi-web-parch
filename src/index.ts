@@ -29,6 +29,7 @@ export default {
       codebarre: 'Code-barre',
       designation: 'Designation',
       'technical-file': 'Fiche technique',
+      'support-de-communication': 'Support de communication',
       category: 'Famille',
       ranges: 'Déclinaison',
       packaging: 'Collisage',
@@ -41,6 +42,7 @@ export default {
       'category',
       'cover',
       'technical-file',
+      'support-de-communication',
     ]);
     const primaryRows = [
       [
@@ -59,8 +61,9 @@ export default {
         .map((row) => row.filter((field) => !primaryFields.has(field.name)))
         .filter((row) => row.length > 0),
       [
-        { name: 'cover', size: 6 },
-        { name: 'technical-file', size: 6 },
+        { name: 'cover', size: 4 },
+        { name: 'technical-file', size: 4 },
+        { name: 'support-de-communication', size: 4 },
       ],
     ];
 

@@ -48,6 +48,16 @@
         "files"
       ]
     },
+    "support-de-communication": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
     "ranges": {
       "type": "component",
       "component": "shared.product-attribute",
