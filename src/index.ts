@@ -29,15 +29,48 @@ export default {
       codebarre: 'Code-barre',
       designation: 'Designation',
       'technical-file': 'Fiche technique',
+      category: 'Famille',
       ranges: 'Déclinaison',
       packaging: 'Collisage',
     };
 
-    const needsUpdate = Object.entries(fieldLabels).some(
-      ([field, label]) =>
-        configuration.metadatas[field].edit.label !== label ||
-        configuration.metadatas[field].list.label !== label
-    );
+    const primaryFields = new Set([
+      'designation',
+      'reference-parch',
+      'reference-fournisseur',
+      'category',
+      'cover',
+      'technical-file',
+    ]);
+    const primaryRows = [
+      [
+        { name: 'reference-parch', size: 6 },
+        { name: 'reference-fournisseur', size: 6 },
+      ],
+      [
+        { name: 'designation', size: 6 },
+        { name: 'category', size: 6 },
+      ],
+    ];
+    const editLayout = configuration.layouts.edit;
+    const updatedEditLayout = [
+      ...primaryRows,
+      ...editLayout
+        .map((row) => row.filter((field) => !primaryFields.has(field.name)))
+        .filter((row) => row.length > 0),
+      [
+        { name: 'cover', size: 6 },
+        { name: 'technical-file', size: 6 },
+      ],
+    ];
+
+    const needsUpdate =
+      JSON.stringify(editLayout) !== JSON.stringify(updatedEditLayout) ||
+      Object.entries(fieldLabels).some(
+        ([field, label]) =>
+          configuration.metadatas[field].edit.label !== label ||
+          configuration.metadatas[field].list.label !== label
+      );
 
     if (needsUpdate) {
       const updatedMetadatas = { ...configuration.metadatas };
@@ -51,6 +84,10 @@ export default {
 
       await contentTypeService.updateConfiguration(contentType, {
         ...configuration,
+        layouts: {
+          ...configuration.layouts,
+          edit: updatedEditLayout,
+        },
         metadatas: updatedMetadatas,
       });
     }
