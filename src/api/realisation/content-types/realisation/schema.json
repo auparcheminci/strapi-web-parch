@@ -20,6 +20,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "Gamme": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gamme.gamme",
+      "inversedBy": "realisations"
     }
   }
 }
