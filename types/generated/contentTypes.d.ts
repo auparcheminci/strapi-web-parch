@@ -501,7 +501,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     packaging: Schema.Attribute.Enumeration<['Blister', 'Display']>;
     publishedAt: Schema.Attribute.DateTime;
-    ranges: Schema.Attribute.JSON;
+    ranges: Schema.Attribute.Component<'shared.product-attribute', true>;
     'reference-fournisseur': Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;

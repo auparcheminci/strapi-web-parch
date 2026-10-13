@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_product_attribute_values",
+  "info": {
+    "displayName": "Valeur de déclinaison"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

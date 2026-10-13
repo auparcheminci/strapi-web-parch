@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_product_attributes",
+  "info": {
+    "displayName": "Attribut de déclinaison"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "values": {
+      "type": "component",
+      "component": "shared.product-attribute-value",
+      "repeatable": true,
+      "required": true
+    }
+  }
+}

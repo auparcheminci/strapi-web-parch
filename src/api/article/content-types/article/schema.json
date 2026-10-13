@@ -49,7 +49,9 @@
       ]
     },
     "ranges": {
-      "type": "json"
+      "type": "component",
+      "component": "shared.product-attribute",
+      "repeatable": true
     },
     "packaging": {
       "type": "enumeration",
