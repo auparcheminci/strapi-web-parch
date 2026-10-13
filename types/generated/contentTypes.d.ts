@@ -499,7 +499,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
-    'niveau-stock': Schema.Attribute.JSON;
     packaging: Schema.Attribute.JSON;
     publishedAt: Schema.Attribute.DateTime;
     ranges: Schema.Attribute.JSON;

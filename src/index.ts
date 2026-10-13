@@ -28,7 +28,6 @@ export default {
       codebarre: 'Code-barre',
       designation: 'Designation',
       'technical-file': 'Fiche technique',
-      'niveau-stock': 'Niveau de Stock',
       ranges: 'Déclinaison',
       packaging: 'Collisage',
     };

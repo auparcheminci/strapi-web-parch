@@ -44,9 +44,6 @@
         "files"
       ]
     },
-    "niveau-stock": {
-      "type": "json"
-    },
     "ranges": {
       "type": "json"
     },
