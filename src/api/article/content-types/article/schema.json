@@ -15,7 +15,11 @@
     "designation": {
       "type": "string"
     },
-    "reference": {
+    "reference-parch": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "reference-fournisseur": {
       "type": "string",
       "maxLength": 80
     },

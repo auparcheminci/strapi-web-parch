@@ -22,7 +22,8 @@ export default {
     const configuration = await contentTypeService.findConfiguration(contentType);
 
     const fieldLabels: Record<string, string> = {
-      reference: 'Référence produit',
+      'reference-parch': 'Référence produit',
+      'reference-fournisseur': 'Référence fournisseur',
       description: 'Description',
       cover: 'Couverture',
       codebarre: 'Code-barre',

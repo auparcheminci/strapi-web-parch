@@ -502,7 +502,11 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     packaging: Schema.Attribute.JSON;
     publishedAt: Schema.Attribute.DateTime;
     ranges: Schema.Attribute.JSON;
-    reference: Schema.Attribute.String &
+    'reference-fournisseur': Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    'reference-parch': Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
       }>;
