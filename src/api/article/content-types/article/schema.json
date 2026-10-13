@@ -52,7 +52,11 @@
       "type": "json"
     },
     "packaging": {
-      "type": "json"
+      "type": "enumeration",
+      "enum": [
+        "Blister",
+        "Display"
+      ]
     },
     "category": {
       "type": "relation",

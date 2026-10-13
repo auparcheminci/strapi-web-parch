@@ -499,7 +499,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
-    packaging: Schema.Attribute.JSON;
+    packaging: Schema.Attribute.Enumeration<['Blister', 'Display']>;
     publishedAt: Schema.Attribute.DateTime;
     ranges: Schema.Attribute.JSON;
     'reference-fournisseur': Schema.Attribute.String &
