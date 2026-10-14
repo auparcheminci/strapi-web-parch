@@ -77,8 +77,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::category.category",
-      "required": true,
-      "inversedBy": "articles"
+      "required": true
     },
     "fournisseur": {
       "type": "relation",
