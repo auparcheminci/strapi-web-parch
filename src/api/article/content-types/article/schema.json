@@ -82,12 +82,14 @@
     "fournisseur": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::fournisseur.fournisseur"
+      "target": "api::fournisseur.fournisseur",
+      "required": true
     },
     "marque": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::marque.marque"
+      "target": "api::marque.marque",
+      "required": true
     },
     "blocks": {
       "type": "dynamiczone",

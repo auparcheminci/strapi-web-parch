@@ -41,6 +41,8 @@ export default {
       'referenceParch',
       'referenceFournisseur',
       'category',
+      'fournisseur',
+      'marque',
       'cover',
       'technicalFile',
       'supportDeCommunication',
@@ -53,6 +55,10 @@ export default {
       [
         { name: 'designation', size: 6 },
         { name: 'category', size: 6 },
+      ],
+      [
+        { name: 'fournisseur', size: 6 },
+        { name: 'marque', size: 6 },
       ],
     ];
     const editLayout = configuration.layouts.edit;

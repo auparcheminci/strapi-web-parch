@@ -497,14 +497,16 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     fournisseur: Schema.Attribute.Relation<
       'manyToOne',
       'api::fournisseur.fournisseur'
-    >;
+    > &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::article.article'
     > &
       Schema.Attribute.Private;
-    marque: Schema.Attribute.Relation<'manyToOne', 'api::marque.marque'>;
+    marque: Schema.Attribute.Relation<'manyToOne', 'api::marque.marque'> &
+      Schema.Attribute.Required;
     packaging: Schema.Attribute.Enumeration<['Blister', 'Display']>;
     publishedAt: Schema.Attribute.DateTime;
     ranges: Schema.Attribute.Component<'shared.product-attribute', true>;
