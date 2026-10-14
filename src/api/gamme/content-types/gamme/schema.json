@@ -13,18 +13,6 @@
   "attributes": {
     "name": {
       "type": "string"
-    },
-    "catalogues": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::catalogue.catalogue",
-      "mappedBy": "Gammes"
-    },
-    "realisations": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::realisation.realisation",
-      "mappedBy": "Gamme"
     }
   }
 }

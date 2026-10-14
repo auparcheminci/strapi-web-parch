@@ -24,8 +24,7 @@
     "Gamme": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::gamme.gamme",
-      "inversedBy": "realisations"
+      "target": "api::gamme.gamme"
     }
   }
 }

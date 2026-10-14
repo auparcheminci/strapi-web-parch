@@ -637,10 +637,6 @@ export interface ApiGammeGamme extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    catalogues: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::catalogue.catalogue'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -649,10 +645,6 @@ export interface ApiGammeGamme extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    realisations: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::realisation.realisation'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
