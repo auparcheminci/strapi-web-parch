@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fournisseurs",
+  "info": {
+    "singularName": "fournisseur",
+    "pluralName": "fournisseurs",
+    "displayName": "Fournisseurs"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nom": {
+      "type": "string"
+    }
+  }
+}
