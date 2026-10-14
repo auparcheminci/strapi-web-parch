@@ -12,17 +12,25 @@
   "pluginOptions": {},
   "attributes": {
     "Fournisseur": {
-      "type": "string"
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::fournisseur.fournisseur",
+      "required": true
     },
-    "Nom du catalogue": {
-      "type": "string"
+    "nomDuCatalogue": {
+      "type": "string",
+      "required": true
     },
     "Marque": {
-      "type": "string"
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::marque.marque",
+      "required": true
     },
     "Document": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "files"
       ]
@@ -30,6 +38,7 @@
     "Couverture": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
@@ -38,7 +47,8 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::gamme.gamme",
-      "inversedBy": "catalogues"
+      "inversedBy": "catalogues",
+      "required": true
     }
   }
 }

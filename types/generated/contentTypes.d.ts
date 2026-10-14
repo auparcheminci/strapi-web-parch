@@ -494,30 +494,35 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
     designation: Schema.Attribute.String & Schema.Attribute.Required;
+    fournisseur: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::fournisseur.fournisseur'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::article.article'
     > &
       Schema.Attribute.Private;
+    marque: Schema.Attribute.Relation<'manyToOne', 'api::marque.marque'>;
     packaging: Schema.Attribute.Enumeration<['Blister', 'Display']>;
     publishedAt: Schema.Attribute.DateTime;
     ranges: Schema.Attribute.Component<'shared.product-attribute', true>;
-    'reference-fournisseur': Schema.Attribute.String &
+    referenceFournisseur: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
       }>;
-    'reference-parch': Schema.Attribute.String &
+    referenceParch: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
       }>;
     slug: Schema.Attribute.UID;
-    'support-de-communication': Schema.Attribute.Media<
+    supportDeCommunication: Schema.Attribute.Media<
       'images' | 'files' | 'videos'
     >;
-    'technical-file': Schema.Attribute.Media<'files'>;
+    technicalFile: Schema.Attribute.Media<'files'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -535,20 +540,27 @@ export interface ApiCatalogueCatalogue extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    Couverture: Schema.Attribute.Media<'images'>;
+    Couverture: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Document: Schema.Attribute.Media<'files'>;
-    Fournisseur: Schema.Attribute.String;
-    Gammes: Schema.Attribute.Relation<'manyToMany', 'api::gamme.gamme'>;
+    Document: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    Fournisseur: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::fournisseur.fournisseur'
+    > &
+      Schema.Attribute.Required;
+    Gammes: Schema.Attribute.Relation<'manyToMany', 'api::gamme.gamme'> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::catalogue.catalogue'
     > &
       Schema.Attribute.Private;
-    'Nom du catalogue': Schema.Attribute.String;
+    Marque: Schema.Attribute.Relation<'manyToOne', 'api::marque.marque'> &
+      Schema.Attribute.Required;
+    nomDuCatalogue: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -581,6 +593,34 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFournisseurFournisseur extends Struct.CollectionTypeSchema {
+  collectionName: 'fournisseurs';
+  info: {
+    displayName: 'Fournisseurs';
+    pluralName: 'fournisseurs';
+    singularName: 'fournisseur';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::fournisseur.fournisseur'
+    > &
+      Schema.Attribute.Private;
+    Nom: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -646,6 +686,38 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMarqueMarque extends Struct.CollectionTypeSchema {
+  collectionName: 'marques';
+  info: {
+    displayName: 'Marques';
+    pluralName: 'marques';
+    singularName: 'marque';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Fournisseurs: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::fournisseur.fournisseur'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::marque.marque'
+    > &
+      Schema.Attribute.Private;
+    Nom: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1197,8 +1269,10 @@ declare module '@strapi/strapi' {
       'api::article.article': ApiArticleArticle;
       'api::catalogue.catalogue': ApiCatalogueCatalogue;
       'api::category.category': ApiCategoryCategory;
+      'api::fournisseur.fournisseur': ApiFournisseurFournisseur;
       'api::gamme.gamme': ApiGammeGamme;
       'api::global.global': ApiGlobalGlobal;
+      'api::marque.marque': ApiMarqueMarque;
       'api::realisation.realisation': ApiRealisationRealisation;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

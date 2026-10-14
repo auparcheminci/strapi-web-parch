@@ -22,14 +22,14 @@ export default {
     const configuration = await contentTypeService.findConfiguration(contentType);
 
     const fieldLabels: Record<string, string> = {
-      'reference-parch': 'Référence produit',
-      'reference-fournisseur': 'Référence fournisseur',
+      referenceParch: 'Référence produit',
+      referenceFournisseur: 'Référence fournisseur',
       description: 'Description',
       cover: 'Couverture',
       codebarre: 'Code-barre',
       designation: 'Designation',
-      'technical-file': 'Fiche technique',
-      'support-de-communication': 'Support de communication',
+      technicalFile: 'Fiche technique',
+      supportDeCommunication: 'Support de communication',
       category: 'Famille',
       ranges: 'Déclinaison',
       packaging: 'Collisage',
@@ -38,17 +38,17 @@ export default {
 
     const primaryFields = new Set([
       'designation',
-      'reference-parch',
-      'reference-fournisseur',
+      'referenceParch',
+      'referenceFournisseur',
       'category',
       'cover',
-      'technical-file',
-      'support-de-communication',
+      'technicalFile',
+      'supportDeCommunication',
     ]);
     const primaryRows = [
       [
-        { name: 'reference-parch', size: 6 },
-        { name: 'reference-fournisseur', size: 6 },
+        { name: 'referenceParch', size: 6 },
+        { name: 'referenceFournisseur', size: 6 },
       ],
       [
         { name: 'designation', size: 6 },
@@ -63,14 +63,14 @@ export default {
         .filter((row) => row.length > 0),
       [
         { name: 'cover', size: 4 },
-        { name: 'technical-file', size: 4 },
-        { name: 'support-de-communication', size: 4 },
+        { name: 'technicalFile', size: 4 },
+        { name: 'supportDeCommunication', size: 4 },
       ],
     ];
 
     const needsUpdate =
       JSON.stringify(editLayout) !== JSON.stringify(updatedEditLayout) ||
-      configuration.metadatas['reference-parch'].edit.description !==
+      configuration.metadatas.referenceParch.edit.description !==
         referenceParchDescription ||
       Object.entries(fieldLabels).some(
         ([field, label]) =>
@@ -80,10 +80,10 @@ export default {
 
     if (needsUpdate) {
       const updatedMetadatas = { ...configuration.metadatas };
-      updatedMetadatas['reference-parch'] = {
-        ...updatedMetadatas['reference-parch'],
+      updatedMetadatas.referenceParch = {
+        ...updatedMetadatas.referenceParch,
         edit: {
-          ...updatedMetadatas['reference-parch'].edit,
+          ...updatedMetadatas.referenceParch.edit,
           description: referenceParchDescription,
         },
       };
@@ -102,6 +102,38 @@ export default {
           edit: updatedEditLayout,
         },
         metadatas: updatedMetadatas,
+      });
+    }
+
+    const catalogueContentType = strapi.contentType('api::catalogue.catalogue');
+    const catalogueConfiguration = await contentTypeService.findConfiguration(catalogueContentType);
+    const catalogueEditLayout = [
+      [{ name: 'nomDuCatalogue', size: 12 }],
+      [{ name: 'Marque', size: 12 }],
+      [{ name: 'Fournisseur', size: 12 }],
+      [{ name: 'Gammes', size: 12 }],
+      [{ name: 'Document', size: 12 }],
+      [{ name: 'Couverture', size: 12 }],
+    ];
+
+    if (
+      JSON.stringify(catalogueConfiguration.layouts.edit) !== JSON.stringify(catalogueEditLayout) ||
+      catalogueConfiguration.settings.mainField !== 'nomDuCatalogue' ||
+      catalogueConfiguration.settings.defaultSortBy !== 'nomDuCatalogue' ||
+      catalogueConfiguration.settings.defaultSortOrder !== 'ASC'
+    ) {
+      await contentTypeService.updateConfiguration(catalogueContentType, {
+        ...catalogueConfiguration,
+        layouts: {
+          ...catalogueConfiguration.layouts,
+          edit: catalogueEditLayout,
+        },
+        settings: {
+          ...catalogueConfiguration.settings,
+          mainField: 'nomDuCatalogue',
+          defaultSortBy: 'nomDuCatalogue',
+          defaultSortOrder: 'ASC',
+        },
       });
     }
   },

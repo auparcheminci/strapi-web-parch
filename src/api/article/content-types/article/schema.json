@@ -16,12 +16,12 @@
       "type": "string",
       "required": true
     },
-    "reference-parch": {
+    "referenceParch": {
       "type": "string",
       "required": true,
       "maxLength": 80
     },
-    "reference-fournisseur": {
+    "referenceFournisseur": {
       "type": "string",
       "required": true,
       "maxLength": 80
@@ -43,7 +43,7 @@
         "images"
       ]
     },
-    "technical-file": {
+    "technicalFile": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -51,7 +51,7 @@
         "files"
       ]
     },
-    "support-de-communication": {
+    "supportDeCommunication": {
       "type": "media",
       "multiple": false,
       "required": false,
