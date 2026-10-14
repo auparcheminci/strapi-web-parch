@@ -80,6 +80,16 @@
       "required": true,
       "inversedBy": "articles"
     },
+    "fournisseur": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::fournisseur.fournisseur"
+    },
+    "marque": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::marque.marque"
+    },
     "blocks": {
       "type": "dynamiczone",
       "components": [
