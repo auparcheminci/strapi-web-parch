@@ -17,6 +17,9 @@
     "Nom du catalogue": {
       "type": "string"
     },
+    "Marque": {
+      "type": "string"
+    },
     "Document": {
       "type": "media",
       "multiple": false,
