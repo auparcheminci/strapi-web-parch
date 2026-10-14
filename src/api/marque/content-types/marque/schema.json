@@ -13,6 +13,11 @@
   "attributes": {
     "Nom": {
       "type": "string"
+    },
+    "Fournisseurs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::fournisseur.fournisseur"
     }
   }
 }
